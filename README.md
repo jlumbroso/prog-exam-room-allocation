@@ -52,6 +52,8 @@ Heuristic methods:
 
 - Zero-indexing?
 
+- In what guise do we have the exam include *testing* or *unit-testing*, if at all?
+
 - How do we store user-room assignments? Do we need to store them or compute them or not?
 
 - To keep track of room capacity, an array `capacity` where `capacity[i]` is the number of slots available in room `i`;
