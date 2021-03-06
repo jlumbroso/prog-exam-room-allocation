@@ -10,13 +10,19 @@
 
 public class ZoomRooms {
 
+    // ---------------- STUDENT CODE BEGIN ----------------
+    public static final int ALG_GREEDY = 0;
+    public static final int ALG_RROBIN = 1;
+    public static final int ALG_RANDOM = 2;
+    // ---------------- STUDENT CODE END ------------------
+
     // Given number of students and max per room, returns the number of rooms needed.
     public static int roomsNeeded(int numStudents, int maxPerRoom) {
         // ---------------- STUDENT CODE BEGIN ----------------
         return (int) Math.ceil((double) numStudents / maxPerRoom);
-        // ---------------- STUDENT CODE ALT ----------------
+        // ---------------- STUDENT CODE ALT ------------------
         // return 3;
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 
     // Prints out the students in one room
@@ -30,7 +36,7 @@ public class ZoomRooms {
                 StdOut.println(studentNames[i]);
             }
         }
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 
     // Prints out the students in all rooms
@@ -39,9 +45,9 @@ public class ZoomRooms {
         for (int i = 0; i < numRooms; i++) {
             printRoom(i, studentRooms, studentNames);
         }
-        // ---------------- STUDENT CODE ALT ----------------
+        // ---------------- STUDENT CODE ALT ------------------
         // printRoom(0, studentRooms, studentNames);
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 
     // Read integer n, followed by n names, reading from StdIn.
@@ -54,9 +60,9 @@ public class ZoomRooms {
             names[i] = StdIn.readString();
         }
         return names;
-        // ---------------- STUDENT CODE ALT ----------------
+        // ---------------- STUDENT CODE ALT ------------------
         // return { "Ava", "Ben", "Carol", "Dan", "Emma", "Finn", "Grace" };
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 
     // This function is provided as part of the assignment.
@@ -82,7 +88,7 @@ public class ZoomRooms {
             assignedRooms[i] = room;
         }
         return assignedRooms;
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 
     public static int[] assignRandom(int numRooms, String[] names, int maxPerRoom) {
@@ -98,7 +104,22 @@ public class ZoomRooms {
             roomCount[room]++;
         }
         return assignedRooms;
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
+    }
+
+    public static int[] assign(int algorithm, int numRooms, String[] names, int maxPerRoom) {
+        // ---------------- STUDENT CODE BEGIN ----------------
+        if (algorithm == ALG_GREEDY) {
+            return assignGreedy(numRooms, names, maxPerRoom);
+        } else if (algorithm == ALG_RROBIN) {
+            return assignRoundRobin(numRooms, names, maxPerRoom);
+        } else if (algorithm == ALG_RANDOM) {
+            return assignRandom(numRooms, names, maxPerRoom);
+        }
+
+        // default result
+        return new int[names.length];
+        // ---------------- STUDENT CODE END ------------------
     }
 
     public static void main(String[] args) {
@@ -108,6 +129,6 @@ public class ZoomRooms {
         int numRooms = roomsNeeded(names.length, maxPerRoom);
         int[] assigned = assignRandom(numRooms, names, maxPerRoom);
         printRooms(numRooms, assigned, names);
-        // ---------------- STUDENT CODE END ----------------
+        // ---------------- STUDENT CODE END ------------------
     }
 }
