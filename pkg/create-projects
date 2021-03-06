@@ -1,0 +1,65 @@
+#!/bin/bash
+
+# This script creates/updates the IntelliJ project files by copying the relevant
+# .idea and .lift subdirectories from a template project (hello). It also
+# creates a .zip file for distribution to students.
+
+# remove pesky files
+find . -name '*.DS_Store' -type f -delete
+find . -name 'Icon?' -size 0 -type f -delete
+find . -name '._*' -type f -delete
+
+
+# the template project, containing a clean copy of the IntelliJ settings (.lift and .idea directories)
+TEMPLATE_PROJECT="hello"
+
+# transfer IntelliJ settings from template project to all other projects
+rsync --times "${COURSE_HOME}/assignments/bin/checkstyle-lift.jar"         "${TEMPLATE_PROJECT}/files/.lift/"
+rsync --times "${COURSE_HOME}/assignments/bin/checkstyle-cos126.xml"       "${TEMPLATE_PROJECT}/files/.lift/"
+rsync --times "${COURSE_HOME}/assignments/bin/checkstyle-suppressions.xml" "${TEMPLATE_PROJECT}/files/.lift/"
+rsync --times "${COURSE_HOME}/assignments/bin/spotbugs.xml"                "${TEMPLATE_PROJECT}/files/.lift/"
+rsync --times "${COURSE_HOME}/assignments/java-classpath/stdlib.jar"       "${TEMPLATE_PROJECT}/files/.lift/"
+rsync --times "${COURSE_HOME}/assignments/java-classpath/introcs.jar"      "${TEMPLATE_PROJECT}/files/.lift/"
+chmod 664 "$TEMPLATE_PROJECT"/files/.lift/*
+
+# copy .idea and .lift directories from template projects to all other projects
+echo ""
+echo "Syncing projects"
+echo "------------------------------------------------"
+for project in "${PROJECTS[@]}"; do
+    # skip if project does not exist or project is the template project
+    if [ "$TEMPLATE_PROJECT" == "$project" ] || [ ! -d "$project" ]; then
+        continue
+    fi
+    echo "${project}:"
+    rsync --archive                     \
+          --quiet                       \
+          --exclude 'runConfigurations' \
+          --exclude '*.save'            \
+          --exclude '.name'             \
+          "${TEMPLATE_PROJECT}/files/.idea/" "${project}/files/.idea/"
+    rsync --archive    \
+          --quiet      \
+          "${TEMPLATE_PROJECT}/files/.lift/" "${project}/files/.lift/"
+
+    # copy iml file
+    cp -p "${TEMPLATE_PROJECT}/files/COS 126.iml" "${project}/files"
+
+    # copy File Header.java if it doesn't exist
+    if [ ! -f "${project}/files/.idea/fileTemplates/includes/File Header.java" ]; then
+        cp -p "${TEMPLATE_PROJECT}/files/.idea/fileTemplates/includes/File Header.java" "${project}/files/.idea/fileTemplates/includes/File Header.java"
+    fi
+done
+
+# create .zip files, put files at top level (as Windows and OS X will create directories automatically)
+echo ""
+echo "Creating/updating zip files"
+echo "------------------------------------------------"
+for project in "${PROJECTS[@]}"; do
+    if [ -d "${project}/files" ]; then
+        echo "${project}:"
+        # use subshell so that cd is not remembered
+        (cd "${project}/files"; zip --recurse-paths --filesync "../${project}.zip" .lift .idea *)
+        chmod 664 "${project}/${project}.zip"
+    fi
+done
