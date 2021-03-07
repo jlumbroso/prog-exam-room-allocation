@@ -81,7 +81,6 @@ So running the program again should produce this:
 ```
 java-introcs ZoomRooms 1 3
 
-
 Room: 1
 ----------
 Ava
