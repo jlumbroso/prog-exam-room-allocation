@@ -111,6 +111,8 @@ Room: 2
 ----------
 ```
 
+You can try it out with various names files in your directory, but note that there will always be two rooms printed out, no matter how many students you read in. That will be fixed in the next step.
+
 **Step 4** (2 pts).
 Now you have a simple math problem. Recall that the second command line argument specifies the room size (the maximum capacity for each room). For example, it's 3 in the command shown above, which means that Ava, Ben and Carol can all fit in Room 1. But how did we get that the number of rooms should be 2? 
 
