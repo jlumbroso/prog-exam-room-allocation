@@ -18,7 +18,7 @@ You may download this file before the exam begins.
 You may use your book, your notes, your code from programming assignments and precepts,, the code on the COS 126 course website, the booksite, and you may read Ed. No form of communication is permitted (e.g., talking, texting, etc.) during the exam, except with course staff.
 
 **Do not discuss.**
-Due to various conflicts, and multiple class times, some of your peers will take the exam at a different time. Do not discuss exam contents with anyone who has not taken the exam.
+Due to various conflicts, and multiple class times, some of your peers will take the exam at a different time. Do not discuss exam contents with anyone until the graded exams are returned. Do not even discuss it with other students who you know have taken the exam.
 
 **Honor Code pledge.**
 Before submitting your solution, you must “electronically sign” the honor code in the obvious comment at the end of your Java file, by retyping the pledge and then your name. 
