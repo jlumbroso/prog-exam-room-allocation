@@ -68,10 +68,6 @@ public class ZoomRooms {
     // It makes a greedy assignment of students to rooms, putting the first roomSize
     // students in the first room, then the next roomSize in the second room, etc.
     public static int[] assignGreedy(int numRooms, String[] names, int roomSize) {
-        if (names.length == 0) {
-            int[] a = { ASSIGN_GREEDY };
-            return a;
-        }
         int[] assignedRooms = new int[names.length];
         for (int i = 0; i < names.length; i++) {
             int room = i / roomSize + 1;
