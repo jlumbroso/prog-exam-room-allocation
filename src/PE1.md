@@ -15,7 +15,7 @@ of the course web page.
 You may download this file before the exam begins.
 
 **Resources.** 
-You may use your book, your notes, your code from programming assignments and precepts,, the code on the COS 126 course website, the booksite, and you may read Piazza. No form of communication is permitted (e.g., talking, texting, etc.) during the exam, except with course staff.
+You may use your book, your notes, your code from programming assignments and precepts,, the code on the COS 126 course website, the booksite, and you may read Ed. No form of communication is permitted (e.g., talking, texting, etc.) during the exam, except with course staff.
 
 **Do not discuss.**
 Due to various conflicts, and multiple class times, some of your peers will take the exam at a different time. Do not discuss exam contents with anyone who has not taken the exam.
