@@ -38,7 +38,7 @@ Your program will be graded on mainly on correctness. You will lose a substantia
 You are an engineer at a startup company called Zoom, which creates software for online video meetings. One feature especially useful in classroom settings is called *breakout rooms*. This feature allows teachers to divide a large class into smaller groups, each of which meets independently in different “rooms.” 
 
 **Greedy Algorithm.**
-Another engineer has already developed an algorithm to assign students to rooms in a “greedy” fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 1, and the next *N* students in Room 2, and so forth. Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to get you started.
+Another engineer has already developed an algorithm to assign students to rooms in a “greedy” fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 1, and the next *N* students in Room 2, and so forth, until there are no students left. Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to get you started.
 
 ## Getting Started
 
