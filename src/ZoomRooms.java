@@ -92,7 +92,7 @@ public class ZoomRooms {
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
-        // int[] temp = [ 1, 1, 1, 2, 2 ];
+        // int[] temp = { 1, 1, 1, 2, 2 };
         // return temp;
         // ---------------- STUDENT CODE END STEP 5 ----------------
     }
@@ -111,7 +111,7 @@ public class ZoomRooms {
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
-        // int[] temp = [ 1, 1, 1, 2, 2 ];
+        // int[] temp = { 1, 1, 1, 2, 2 };
         // return temp;
         // ---------------- STUDENT CODE END ----------------
     }
