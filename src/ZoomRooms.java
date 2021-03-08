@@ -67,10 +67,10 @@ public class ZoomRooms {
     // This function is provided as part of the assignment.
     // It makes a greedy assignment of students to rooms, putting the first roomSize
     // students in the first room, then the next roomSize in the second room, etc.
-    public static int[] assignGreedy(int numRooms, String[] names, int roomSize) {
+    public static int[] assignGreedy(int roomSize, int numRooms, String[] names) {
         int[] assignedRooms = new int[names.length];
         for (int i = 0; i < names.length; i++) {
-            int room = i / roomSize + 1;
+            int room = (i / roomSize) + 1;
             assignedRooms[i] = room;
         }
         return assignedRooms;
@@ -79,12 +79,13 @@ public class ZoomRooms {
     // Assign students to rooms in a round-robin fashion: first student in first room,
     // second student in second room, etc, until each room has one student. Then the
     // next student goes to the first room, then second room, etc.
-    public static int[] assignRoundRobin(int numRooms, String[] names, int roomSize) {
+    public static int[] assignRobin(int roomSize, int numRooms, String[] names) {
         // ---------------- STUDENT CODE BEGIN STEP 5 ----------------
         int[] assignedRooms = new int[names.length];
         for (int i = 0; i < names.length; i++) {
-            int room = i % roomSize + 1;
+            int room = (i % numRooms) + 1;
             assignedRooms[i] = room;
+            StdOut.println(i + " " + room);
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
@@ -93,14 +94,14 @@ public class ZoomRooms {
         // ---------------- STUDENT CODE END STEP 5 ----------------
     }
 
-    public static int[] assignRandom(int numRooms, String[] names, int roomSize) {
+    public static int[] assignRandom(int roomSize, int numRooms, String[] names) {
         // ---------------- STUDENT CODE BEGIN ----------------
         int[] assignedRooms = new int[names.length];
-        int[] roomCount = new int[numRooms];
+        int[] roomCount = new int[numRooms + 1];
         for (int i = 0; i < names.length; i++) {
             int room;
             do {
-                room = (int) (Math.random() * numRooms);
+                room = (int) (Math.random() * numRooms) + 1;
             } while (roomCount[room] == roomSize); // tricky!
             assignedRooms[i] = room;
             roomCount[room]++;
@@ -112,27 +113,25 @@ public class ZoomRooms {
         // ---------------- STUDENT CODE END ----------------
     }
     
-    // Codes for three possible algorithms for assigning students to rooms:
-    public static int ASSIGN_GREEDY = 1;
-    public static int ASSIGN_ROBIN  = 2;
-    public static int ASSIGN_RANDOM = 3;
-    
     // Assigns students to Zoom rooms. Takes two command line arguments:
-    // * algorithm code = always one of the three codes above (1, 2, or 3)
+    // * algorithm, always one of "greedy", "robin", or "random"
     // * roomSize = capacity of each room (assume this is >= 2)
     // Also reads list of student names from StdIn.
     public static void main(String[] args) {
-        int algorithm = Integer.parseInt(args[0]);
+        String algorithm = args[0];
         int roomSize = Integer.parseInt(args[1]);
         String[] names = readNames();
         int numRooms = roomsNeeded(names.length, roomSize);
         int[] assigned;
-        if (algorithm == ASSIGN_GREEDY)
-            assigned = assignGreedy(numRooms, names, roomSize);
-        else if (algorithm == ASSIGN_ROBIN)
-            assigned = assignRoundRobin(numRooms, names, roomSize);
-        else // must be ASSIGN_RANDOM
-            assigned = assignRandom(numRooms, names, roomSize);            
+        if (algorithm.equals("greedy")) {
+            assigned = assignGreedy(roomSize, numRooms, names);
+        }
+        else if (algorithm.equals("robin")) {
+            assigned = assignRobin(roomSize, numRooms, names);
+        }
+        else { // must be "random", the only other choice
+            assigned = assignRandom(roomSize, numRooms, names);
+        }
         printRooms(numRooms, assigned, names);
     }
 }
