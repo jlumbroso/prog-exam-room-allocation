@@ -52,7 +52,7 @@ javac-introcs ZoomRooms.java
 java-introcs ZoomRooms greedy 3
 
 Room: 1
-----------
+-------
 ```
 
 There are two command line arguments given here (the string `greedy` and the number 3. The first one tells tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case).
