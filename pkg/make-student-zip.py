@@ -26,7 +26,7 @@ def uncommentAltLine(line):
 def commentToStartAlt(line):
     locate = line.find('//') + 3
     prefix = line[:locate]
-    return f"\n{prefix} This code is just temporary and should be replaced:\n"
+    return f"\n{prefix}This code is just temporary and should be replaced:\n"
     
 def commentStateMachine(lines):
     output = []
@@ -68,7 +68,7 @@ def writeAlternateNames(bothFile, studentDir):
         column = 1-column
         name  += "\n"
         names.append(name)
-    counts = [7,17,26]
+    counts = [0,1,2,3,5,7,11,18,26]
     for count in counts:
         writeNamesFile(names, count, studentDir)
     
