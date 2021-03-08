@@ -28,7 +28,7 @@ Submit your work using the `Submit` link on
 the **Exams** tab of the course [web page](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html). 
 
 **Grading.**
-Your program will be graded on mainly on correctness. You will lose a substantial fraction of your overall grade if your program does not compile, or if it crashes on typical inputs. Clarity (including comments), design, and efficiency are secondary concerns for this timed exam.
+Your program will be graded on mainly on correctness. You will lose a substantial fraction of your overall grade if your program does not compile, or if it crashes on typical inputs. Clarity (including comments), design, and efficiency are secondary concerns with regards to gradinge for this timed exam. Nevertheless, writing clear code is always important and will help you understand your code better.
 
 ---
 <div style="page-break-after: always;"></div>
