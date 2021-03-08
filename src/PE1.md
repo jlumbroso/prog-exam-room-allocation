@@ -49,13 +49,13 @@ Notice that if you compile and run the code it already does something:
 
 ```
 javac-introcs ZoomRooms.java
-java-introcs ZoomRooms 1 3
+java-introcs ZoomRooms greedy 3
 
 Room: 1
 ----------
 ```
 
-There are two command line arguments given here (the numbers 1 and 3 that follow `java-introcs ZoomRooms` above). The first one tells tells the program which assignment algorithm to use (1 for “greedy” in this case, and you may assume it is always 1, 2 or 3). The second argument is the maximum number of students the teacher wants in each room (3 in this case).
+There are two command line arguments given here (the string `greedy` and the number 3. The first one tells tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case).
 
 As a reminder: the code you submit in the end should *still* compile, and also run without errors for all inputs that match the program specications.
 
@@ -79,7 +79,7 @@ Write a loop that considers each student in turn, and prints out the names of th
 So running the program again should produce this:
 
 ```
-java-introcs ZoomRooms 1 3
+java-introcs ZoomRooms greedy 3
 
 Room: 1
 ----------
@@ -99,7 +99,7 @@ Your starting code has a function `readNames` that returns an array of student n
 Your function should return an array containing those *N* student names. For example, if you provide the file `names3.txt` on `StdIn` your version of `readNames` would return the three names in that text file (which happen to be first three above), and the output would be:
 
 ```
-java-introcs ZoomRooms 1 3 < names3.txt
+java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 1
 ----------
@@ -120,10 +120,10 @@ The function `roomsNeeded` receives two arguments: `numStudents` (the total numb
 This function should compute the number of rooms needed, but as provided it always just returns 2, no matter what. Instead change it to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. Try it out using some of the sample input files with different numbers of students, to convince yourself it works properly.
 
 **Step 5** (5 pts).
-One of the drawbacks of the “greedy” algorithm for assigning students to rooms is that you might end up with a room with only one student alone, at the end of the list. A way to (mostly) avoid this problem is to assign the students in “round robin” order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. Your next task is to implement this algorithm in the function `assignRoundRobin`. After you have it coded up, you can try it out like this:
+One of the drawbacks of the “greedy” algorithm for assigning students to rooms is that you might end up with a room with only one student alone, at the end of the list. A way to (mostly) avoid this problem is to assign the students in “round robin” order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. Your next task is to implement this algorithm in the function `assignRobin`. After you have it coded up, you can try it out like this:
 
 ```
-java-introcs ZoomRooms 2 3 < names5.txt
+java-introcs ZoomRooms robin 3 < names5.txt
 
 Room: 1
 ----------
@@ -149,7 +149,11 @@ Your goal is to implement a third assignment algorithm in the function `assignRa
 * As you assign students to rooms (randomly) you could maintain an array that tracks how many are in each room, and avoid assigning students to rooms that are full.
 * Alternately, you could shuffle the list of students randomly; and then assign them using, say, the “round robin” approach.
 
-Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input.
+Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input, which could be done for example like this:
+
+```
+java-introcs ZoomRooms random 3 < names5.txt
+```
 
 ## Finishing Up
 Don't forget to write and electronically sign the Honor Code pledge in the comment at the end of your Java file, before uploading it.
