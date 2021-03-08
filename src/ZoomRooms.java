@@ -25,7 +25,7 @@ public class ZoomRooms {
     public static void printRoom(int room, int[] studentRooms, String[] studentNames) {
         StdOut.println(); // begin with a blank line to separate from anything above
         StdOut.println("Room: " + room);
-        StdOut.println("----------");
+        StdOut.println("-------");
         // ---------------- STUDENT CODE BEGIN STEP 2 ----------------
         for (int i = 0; i < studentRooms.length; i++) {
             if (room == studentRooms[i]) {
