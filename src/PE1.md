@@ -21,7 +21,7 @@ You may use your book, your notes, your code from programming assignments and pr
 Due to various conflicts, and multiple class times, some of your peers will take the exam at a different time. Do not discuss exam contents with anyone *(not even other students that you know already took the exam!)* until after the graded exams are returned. 
 
 **Honor Code pledge.**
-Before submitting your solution, you must “electronically sign” the honor code in the obvious comment at the end of your Java file, by retyping the pledge and then your name. 
+Before submitting your solution, you must "electronically sign" the honor code in the obvious comment at the end of your Java file, by retyping the pledge and then your name. 
 
 **Submissions.**
 Submit your work using the `Submit` link on
@@ -35,10 +35,10 @@ Your program will be graded on mainly on correctness. You will lose a substantia
 
 ## Background
 
-You are an engineer at a startup company called Zoom, which creates software for online video meetings. One feature especially useful in classroom settings is called *breakout rooms*. This feature allows teachers to divide a large class into smaller groups, each of which meets independently in different “rooms.” 
+You are an engineer at a startup company called Zoom, which creates software for online video meetings. One feature especially useful in classroom settings is called *breakout rooms*. This feature allows teachers to divide a large class into smaller groups, each of which meets independently in different "rooms." 
 
 **Greedy Algorithm.**
-Another engineer has already developed an algorithm to assign students to rooms in a “greedy” fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 1, and the next *N* students in Room 2, and so forth, until there are no students left. Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to get you started.
+Another engineer has already developed an algorithm to assign students to rooms in a "greedy" fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 1, and the next *N* students in Room 2, and so forth, until there are no students left. Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to get you started.
 
 ## Getting Started
 
@@ -82,13 +82,13 @@ So running the program again should produce this:
 java-introcs ZoomRooms greedy 3
 
 Room: 1
-----------
+-------
 Ava
 Ben
 Carol
 
 Room: 2
-----------
+-------
 Dan
 Emma
 ```
@@ -102,13 +102,13 @@ Your function should return an array containing those *N* student names. For exa
 java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 1
-----------
+-------
 Ava
 Ben
 Carol
 
 Room: 2
-----------
+-------
 ```
 
 You can try it out with various names files in your directory, but note that there will always be two rooms printed out, no matter how many students you read in. That will be fixed in the next step.
@@ -120,19 +120,19 @@ The function `roomsNeeded` receives two arguments: `numStudents` (the total numb
 This function should compute the number of rooms needed, but as provided it always just returns 2, no matter what. Instead change it to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. Try it out using some of the sample input files with different numbers of students, to convince yourself it works properly.
 
 **Step 5** (5 pts).
-One of the drawbacks of the “greedy” algorithm for assigning students to rooms is that you might end up with a room with only one student alone, at the end of the list. A way to (mostly) avoid this problem is to assign the students in “round robin” order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. Your next task is to implement this algorithm in the function `assignRobin`. After you have it coded up, you can try it out like this:
+One of the drawbacks of the "greedy" algorithm for assigning students to rooms is that you might end up with a room with only one student alone, at the end of the list. A way to (mostly) avoid this problem is to assign the students in "round robin" order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. Your next task is to implement this algorithm in the function `assignRobin`. After you have it coded up, you can try it out like this:
 
 ```
 java-introcs ZoomRooms robin 3 < names5.txt
 
 Room: 1
-----------
+-------
 Ava
 Carol
 Emma
 
 Room: 2
-----------
+-------
 Ben
 Dan
 ```
@@ -147,7 +147,7 @@ Congratulations if you made it this far! This last step is hard one, to provide 
 Your goal is to implement a third assignment algorithm in the function `assignRandom` that places students in rooms randomly, with equal probability of ending up in any room. Note that rooms still have capacity `roomSize` so you need to keep track of that somehow. As a hint, here are two possible general strategies for accomplishing this goal:
 
 * As you assign students to rooms (randomly) you could maintain an array that tracks how many are in each room, and avoid assigning students to rooms that are full.
-* Alternately, you could shuffle the list of students randomly; and then assign them using, say, the “round robin” approach.
+* Alternately, you could shuffle the list of students randomly; and then assign them using, say, the "round robin" approach.
 
 Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input, which could be done for example like this:
 
