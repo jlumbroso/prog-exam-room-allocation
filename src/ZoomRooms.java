@@ -22,13 +22,13 @@ public class ZoomRooms {
     }
 
     // Prints out the students in one room
-    public static void printRoom(int room, int[] studentRooms, String[] studentNames) {
+    public static void printRoom(int room, int[] assignedRooms, String[] studentNames) {
         StdOut.println(); // begin with a blank line to separate from anything above
         StdOut.println("Room: " + room);
         StdOut.println("-------");
         // ---------------- STUDENT CODE BEGIN STEP 2 ----------------
-        for (int i = 0; i < studentRooms.length; i++) {
-            if (room == studentRooms[i]) {
+        for (int i = 0; i < assignedRooms.length; i++) {
+            if (room == assignedRooms[i]) {
                 StdOut.println(studentNames[i]);
             }
         }
@@ -36,14 +36,14 @@ public class ZoomRooms {
     }
 
     // Prints out the students in all rooms
-    public static void printRooms(int numRooms, int[] studentRooms, String[] studentNames) {
+    public static void printRooms(int numRooms, int[] assignedRooms, String[] studentNames) {
         // ---------------- STUDENT CODE BEGIN STEP 1 ----------------
         for (int i = 1; i <= numRooms; i++) {
-            printRoom(i, studentRooms, studentNames);
+            printRoom(i, assignedRooms, studentNames);
         }
         // ---------------- STUDENT CODE ALT ----------------
         // // For now it just prints room 1. Add a loop so that it prints all numRooms.
-        // printRoom(1, studentRooms, studentNames);
+        // printRoom(1, assignedRooms, studentNames);
         // ---------------- STUDENT CODE END STEP 1 ----------------
     }
 
@@ -113,6 +113,20 @@ public class ZoomRooms {
         // ---------------- STUDENT CODE END ----------------
     }
     
+    private static void debug(int roomSize, int numRooms, int[] assignedRooms, String[] names) {
+        StdOut.println("Called debug() function.");
+        StdOut.println("roomSize: " + roomSize);
+        StdOut.println("numRooms: " + numRooms);
+        StdOut.println("assignedRooms...");
+        for (int i = 0; i < assignedRooms.length; i++) {
+            StdOut.println(i + ": " + assignedRooms[i]);
+        }
+        StdOut.println("names...");
+        for (int i = 0; i < names.length; i++) {
+            StdOut.println(i + ": " + names[i]);
+        }
+    }
+
     // Assigns students to Zoom rooms. Takes two command line arguments:
     // * algorithm, always one of "greedy", "robin", or "random"
     // * roomSize = capacity of each room (assume this is >= 2)
@@ -122,17 +136,27 @@ public class ZoomRooms {
         int roomSize = Integer.parseInt(args[1]);
         String[] names = readNames();
         int numRooms = roomsNeeded(names.length, roomSize);
-        int[] assigned;
-        if (algorithm.equals("greedy")) {
-            assigned = assignGreedy(roomSize, numRooms, names);
+        int[] assignedRooms;
+
+        // Choose which algorithm
+        if (algorithm.startsWith("greedy")) {
+            assignedRooms = assignGreedy(roomSize, numRooms, names);
         }
-        else if (algorithm.equals("robin")) {
-            assigned = assignRobin(roomSize, numRooms, names);
+        else if (algorithm.startsWith("robin")) {
+            assignedRooms = assignRobin(roomSize, numRooms, names);
         }
-        else { // must be "random", the only other choice
-            assigned = assignRandom(roomSize, numRooms, names);
+        else { // must be "random" (the only other choice)
+            assignedRooms = assignRandom(roomSize, numRooms, names);
         }
-        printRooms(numRooms, assigned, names);
+
+        // If it's like "greedy-debug" (or "robin-debug", etc) then use debug output.
+        // Otherwise just print out the rooms.
+        if (algorithm.endsWith("debug")) {
+            debug(roomSize, numRooms, assignedRooms, names);
+        }
+        else {
+            printRooms(numRooms, assignedRooms, names);
+        }
     }
 }
 
