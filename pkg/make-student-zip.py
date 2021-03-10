@@ -1,15 +1,13 @@
 import os
+import shutil
+import sys
 
-def runCmd(cmd):
-    ret = os.system(cmd)
-    if ret:
-        msg = r'this command got error {ret}: {cmd}'
-        print(msg)
+NAMES_FILE = "names-both-male-female.txt"
+CODE_FILES = ["ZoomRooms.java"]
 
-def setupStudentDir(studentDir):
-    cmd = f'rm -rf {studentDir}'
-    runCmd(cmd)
-    os.mkdir(studentDir)
+def setup_student_dir(student_dir):
+    shutil.rmtree(student_dir, ignore_errors=True)
+    os.mkdir(student_dir)
 
 def lineMatchesStudentCodeBegin(line):
     return 'STUDENT CODE BEGIN' in line
@@ -50,14 +48,14 @@ def commentStateMachine(lines):
             output.append(line)
     return output
 
-def writeNamesFile(names, count, studentDir):
+def write_names_file(names, count, student_dir):
     line   = f"{count}\n"
     prefix = [line] + names[:count]
-    fName  = f'{studentDir}/names{count}.txt'
-    with open(fName, 'w') as f:
+    filename  = os.path.join(student_dir, f'names{count}.txt')
+    with open(filename, 'w') as f:
         f.writelines(prefix)
     
-def writeAlternateNames(bothFile, studentDir):
+def write_alternate_names(bothFile, studentDir):
     with open(bothFile) as f:
         lines = f.readlines()
     names = []
@@ -70,24 +68,34 @@ def writeAlternateNames(bothFile, studentDir):
         names.append(name)
     counts = [0,1,2,3,5,7,11,18,26]
     for count in counts:
-        writeNamesFile(names, count, studentDir)
+        write_names_file(names, count, studentDir)
     
-def writeNames(studentDir):
-    writeAlternateNames('names-both-male-female.txt',studentDir)
+def write_names(student_dir, source_dir):
+    write_alternate_names(os.path.join(source_dir, NAMES_FILE), student_dir)
 
-def makeStudentVersion(solutionFile, studentDir):
-    with open(solutionFile) as f:
-        lines = f.readlines()
-    studentVersion = commentStateMachine(lines)
-    studentFile = f'{studentDir}/{solutionFile}'
-    with open(studentFile, 'w') as f:
-        f.writelines(studentVersion)
-    
+def make_student_version(student_dir, solution_files):
+    for solution_file in solution_files:
+        with open(solution_file) as f:
+            solution_lines = f.readlines()
+        student_lines = commentStateMachine(solution_lines)
+        student_file = os.path.join(student_dir, os.path.basename(solution_file))
+        with open(student_file, 'w') as f:
+            f.writelines(student_lines)
+
 def main():
-    studentDir = 'ZoomRooms'
-    setupStudentDir(studentDir)
-    solutionFile = 'ZoomRooms.java'
-    makeStudentVersion(solutionFile, studentDir)
-    writeNames(studentDir)
+    if len(sys.argv) < 4:
+        print(
+            "make-student-zip <student folder> <source folder> <solution file 1> [<solution file 2> ...]",
+            file=sys.stderr,
+        )
+        return
+    
+    student_dir = sys.argv[1]
+    source_dir = sys.argv[2]
+    solution_files = list(map(lambda filename: os.path.join(source_dir, filename), sys.argv[3:]))
+
+    setup_student_dir(student_dir)
+    make_student_version(student_dir, solution_files)
+    write_names(student_dir, source_dir)
 
 main()
