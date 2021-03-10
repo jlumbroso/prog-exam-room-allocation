@@ -22,7 +22,7 @@ jobs:
         run: "rm -Rf ./output; mkdir ./output"
 
       - name: Install markdown-to-pdf
-        run: npm install --prefix . md-to-pdf
+        run: "npm install --prefix . md-to-pdf"
       
       - name: Compile PDF exam
         run: "node node_modules/md-to-pdf/dist/cli.js --body-class 'markdown-body' --css '.page-break { page-break-after: always; } .markdown-body { font-size: 10px; } .markdown-body pre > code { white-space: pre-wrap; }' --stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' ./src/PE1.md"
@@ -31,13 +31,13 @@ jobs:
         run: "python ./pkg/make-student-zip.py output/ZoomRooms src ZoomRooms.java"
       
       - name: Copy exam to folder
-        run: "mv ./src/PE1.pdf ./output/ZoomRooms/exam.pdf"
+        run: "mv -v ./src/PE1.pdf ./output/ZoomRooms/exam.pdf"
       
       - name: Copy IntelliJ files to folder
-        run: "cp -pr ./pkg/template/* ./output/ZoomRooms/; mv ./output/ZoomRooms/{LIFT,ZoomRooms}.iml"
+        run: "cp -vpr ./pkg/template/* ./output/ZoomRooms/; mv -v ./output/ZoomRooms/{LIFT,ZoomRooms}.iml"
       
       - name: ZIP folder
-        run: "rm -Rf ./PE1.zip; pushd ./output; zip -r PE1.zip ./ZoomRooms; popd; mv output/PE1.zip ./"
+        run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
       
       - name: Commit compiled PDF
         uses: EndBug/add-and-commit@v4
