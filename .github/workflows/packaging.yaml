@@ -34,7 +34,7 @@ jobs:
         run: "mv ./src/PE1.pdf ./output/ZoomRooms/exam.pdf"
       
       - name: Copy IntelliJ files to folder
-        run: "cp -pr ./pkg/template/* ./output/ZoomRooms/"
+        run: "cp -pr ./pkg/template/* ./output/ZoomRooms/; mv ./output/ZoomRooms/{LIFT,ZoomRooms}.iml"
       
       - name: ZIP folder
         run: "rm -Rf ./PE1.zip; pushd ./output; zip -r PE1.zip ./ZoomRooms; popd; mv output/PE1.zip ./"
