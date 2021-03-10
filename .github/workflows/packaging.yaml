@@ -40,12 +40,22 @@ jobs:
       - name: ZIP folder
         run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht ZoomRooms; tree -a ZoomRooms; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
       
-      - name: Commit compiled PDF
-        uses: EndBug/add-and-commit@v4
+      - name: Version ZIP file
+        run: "mv PE1.zip $(date +'PE1-%Y_%m_%d-%H_%M.zip')"
+      
+      # - name: Commit compiled PDF
+      #   uses: EndBug/add-and-commit@v4
+      #   with:
+      #     message: "Commit compiled ZIP"
+      #     add: "PE1.zip"
+      #     cwd: "."
+      #     force: true
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish release of compiled ZIP
+        uses: ncipollo/release-action@v1
         with:
-          message: "Commit compiled ZIP"
-          add: "PE1.zip"
-          cwd: "."
-          force: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "PE1*.zip"
+          body: "Latest release of the PE1 student ZIP."
+          token: ${{ secrets.GITHUB_TOKEN }}
