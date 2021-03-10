@@ -33,8 +33,8 @@ jobs:
       - name: Copy exam to folder
         run: "mv -v ./src/PE1.pdf ./output/ZoomRooms/exam.pdf"
       
-      - run: "rsync --archive --quiet --exclude 'runConfigurations' --exclude '*.save' --exclude '.name' './pkg/template/.idea/' '.output/ZoomRooms/.idea/'"
-      - run: "rsync --archive --quiet './pkg/template/.lift/' '.output/ZoomRooms/.lift/'"
+      - run: "rsync --archive --quiet --exclude 'runConfigurations' --exclude '*.save' --exclude '.name' './pkg/template/.idea/' './output/ZoomRooms/.idea/'"
+      - run: "rsync --archive --quiet './pkg/template/.lift/' './output/ZoomRooms/.lift/'"
       - run: "cp -vpr ./pkg/template/LIFT.iml ./output/ZoomRooms/ZoomRooms.iml"
       
       - name: ZIP folder
