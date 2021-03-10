@@ -23,12 +23,18 @@ jobs:
 
       - name: Install markdown-to-pdf
         run: "npm install --prefix . md-to-pdf"
+
+      - name: Create student folder
+        run: "python ./pkg/make-student-zip.py output/ZoomRooms src ZoomRooms.java"
+      
+      - name: Add timestamp to student code file
+        run: 'echo "" >> output/ZoomRooms/ZoomRooms.java; echo "// Generated on $(TZ=EST date)" >> ./output/ZoomRooms/ZoomRooms.java'
+      
+      - name: Add timestamp to Markdown exam
+        run: 'echo "" >> ./src/PE1.md; echo "*<sub><sup>Compiled on $(TZ=EST date)</sup></sub>*" >> ./src/PE1.md'
       
       - name: Compile PDF exam
         run: "node node_modules/md-to-pdf/dist/cli.js --body-class 'markdown-body' --css '.page-break { page-break-after: always; } .markdown-body { font-size: 10px; } .markdown-body pre > code { white-space: pre-wrap; }' --stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' ./src/PE1.md"
-      
-      - name: Create student folder
-        run: "python ./pkg/make-student-zip.py output/ZoomRooms src ZoomRooms.java"
       
       - name: Copy exam to folder
         run: "mv -v ./src/PE1.pdf ./output/ZoomRooms/PE1-exam.pdf"
@@ -41,7 +47,7 @@ jobs:
         run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht ZoomRooms; tree -a ZoomRooms; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
       
       - name: Version ZIP file
-        run: "mv PE1.zip $(date +'PE1-%Y_%m_%d-%H_%M.zip')"
+        run: "mv PE1.zip $(TZ=EST date +'PE1-%Y_%m_%d-%H_%M.zip')"
       
       # - name: Commit compiled PDF
       #   uses: EndBug/add-and-commit@v4
