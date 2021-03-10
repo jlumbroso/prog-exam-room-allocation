@@ -37,7 +37,7 @@ jobs:
         run: "cp -pr ./pkg/template/* ./output/ZoomRooms/"
       
       - name: ZIP folder
-        run: "rm ./PE1.zip; pushd ./output; zip -r PE1.zip ./ZoomRooms; popd; mv output/PE1.zip ./"
+        run: "rm -Rf ./PE1.zip; pushd ./output; zip -r PE1.zip ./ZoomRooms; popd; mv output/PE1.zip ./"
       
       - name: Commit compiled PDF
         uses: EndBug/add-and-commit@v4
