@@ -52,10 +52,12 @@ jobs:
       #     force: true
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish release of compiled ZIP
-        uses: ncipollo/release-action@v1
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          artifacts: "PE1*.zip"
-          body: "Latest release of the PE1 student ZIP."
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Latest release of the PE1 student ZIP"
+          files: |
+            PE1*.zip
