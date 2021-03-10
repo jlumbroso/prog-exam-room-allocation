@@ -38,12 +38,12 @@ public class ZoomRooms {
     // Prints out the students in all rooms
     public static void printRooms(int numRooms, int[] assignedRooms, String[] studentNames) {
         // ---------------- STUDENT CODE BEGIN STEP 1 ----------------
-        for (int i = 1; i <= numRooms; i++) {
+        for (int i = 0; i < numRooms; i++) {
             printRoom(i, assignedRooms, studentNames);
         }
         // ---------------- STUDENT CODE ALT ----------------
-        // // For now it just prints room 1. Add a loop so that it prints all numRooms.
-        // printRoom(1, assignedRooms, studentNames);
+        // // For now it just prints room 0. Add a loop so that it prints all numRooms.
+        // printRoom(0, assignedRooms, studentNames);
         // ---------------- STUDENT CODE END STEP 1 ----------------
     }
 
@@ -70,7 +70,7 @@ public class ZoomRooms {
     public static int[] assignGreedy(int roomSize, int numRooms, String[] names) {
         int[] assignedRooms = new int[names.length];
         for (int i = 0; i < names.length; i++) {
-            int room = (i / roomSize) + 1;
+            int room = i / roomSize;
             assignedRooms[i] = room;
         }
         return assignedRooms;
@@ -83,13 +83,13 @@ public class ZoomRooms {
         // ---------------- STUDENT CODE BEGIN STEP 5 ----------------
         int[] assignedRooms = new int[names.length];
         for (int i = 0; i < names.length; i++) {
-            int room = (i % numRooms) + 1;
+            int room = i % numRooms;
             assignedRooms[i] = room;
             StdOut.println(i + " " + room);
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
-        // int[] temp = { 1, 1, 1, 2, 2 };
+        // int[] temp = { 0, 0, 0, 1, 1 };
         // return temp;
         // ---------------- STUDENT CODE END STEP 5 ----------------
     }
@@ -97,18 +97,18 @@ public class ZoomRooms {
     public static int[] assignRandom(int roomSize, int numRooms, String[] names) {
         // ---------------- STUDENT CODE BEGIN ----------------
         int[] assignedRooms = new int[names.length];
-        int[] roomCount = new int[numRooms + 1];
+        int[] roomCount = new int[numRooms];
         for (int i = 0; i < names.length; i++) {
             int room;
             do {
-                room = (int) (Math.random() * numRooms) + 1;
+                room = (int) (Math.random() * numRooms);
             } while (roomCount[room] == roomSize); // tricky!
             assignedRooms[i] = room;
             roomCount[room]++;
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
-        // int[] temp = { 1, 1, 1, 2, 2 };
+        // int[] temp = { 0, 0, 0, 1, 1 };
         // return temp;
         // ---------------- STUDENT CODE END ----------------
     }

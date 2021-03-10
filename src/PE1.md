@@ -43,7 +43,8 @@ Your program will be graded on mainly on correctness. You will lose a substantia
 You are an engineer at a startup company called Zoom, writing software for online video meetings. A feature commonly used in classroom settings is called *breakout rooms*. It allows teachers to divide a large class into smaller groups, each of which meets independently in different "rooms." 
 
 **Greedy Algorithm.**
-Another engineer has already developed an algorithm to assign students to rooms in a "greedy" fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 1, and the next *N* students in Room 2, and so forth, until there are no students left. Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to support this algorithm.
+Another engineer has already developed an algorithm to assign students to rooms in a "greedy" fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 0, and the next *N* students in Room 1, and so forth, until there are no students left. (Note that as engineers we are numbering the rooms starting with 0 &ndash; the convention we use throughout this exam &ndash; but naturally the Zoom interface will translate those numbers to start with 1.)
+Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to support this algorithm.
 
 ## Getting Started
 
@@ -56,13 +57,13 @@ Notice that if you compile and run the code it already does something:
 % javac-introcs ZoomRooms.java
 % java-introcs ZoomRooms greedy 3
 
-Room: 1
+Room: 0
 -------
 ```
 
 There are two command line arguments given here (the string `greedy` and the number 3. The first one tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case). 
 
-Also possibly helpful is a debugging function (`debug`) that tells you the state of some variables in the main function, which can be triggered by appending `-debug` to the name of the algorithm, like this:
+Also possibly helpful is a debugging function (called `debug`) that tells you the state of some variables in the main function. It can be triggered by appending `-debug` to the name of the algorithm. So to show this special output, use the algorithm name `greedy-debug`, `robin-debug` or `random-debug`, like this:
 
 ```
 % java-introcs ZoomRooms greedy-debug 3
@@ -70,11 +71,11 @@ Called debug() function.
 roomSize: 3
 numRooms: 2
 assignedRooms...
-0: 1
-1: 1
-2: 1
-3: 2
-4: 2
+0: 0
+1: 0
+2: 0
+3: 1
+4: 1
 names...
 0: Ava
 1: Ben
@@ -83,20 +84,22 @@ names...
 4: Emma
 ```
 
-Don't worry too much about the details of that debugging output right now &ndash; the different parts will become clear shortly. Also as a reminder: the code you submit in the end should *still* compile, and also run without errors for all inputs that match the program specications.
+You do not need to use this function to write a good solution for this exam, but some people might find it helpful especially if they get stuck. Don't worry too much about the details of that debugging output right now &ndash; the different parts will become clear shortly. 
+
+Also as a reminder: the code you submit in the end should *still* compile, and also run without errors for all inputs that match the program specications.
 
 ## The Exam
 
 **Step 1**.
-The starting code you ran in the last step only prints out the first room. Modify the `printRooms` function so that it prints out all `numRooms` rooms, by adding a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 1 and 2, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
+The starting code you ran in the last step only prints out the first room. Modify the `printRooms` function so that it prints out all `numRooms` rooms, by adding a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 0 and 1, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
 
 ```
 % java-introcs ZoomRooms greedy 3
 
-Room: 1
+Room: 0
 -------
 
-Room: 2
+Room: 1
 -------
 ```
 
@@ -105,25 +108,25 @@ Next you will modify the `printRoom` function so that it prints out names of stu
 
 index  | assignedRooms | studentNames
 ------ | ------------- | ------------
-0      | 1             | Ava
-1      | 1             | Ben
-2      | 1             | Carol
-3      | 2             | Dan
-4      | 2             | Emma
+0      | 0             | Ava
+1      | 0             | Ben
+2      | 0             | Carol
+3      | 1             | Dan
+4      | 1             | Emma
 
-Write a loop that considers each student in turn, and prints out the names of those students whose entry in `studentRooms` match the `room` argument. For the example arrays shown above, if `room == 2`, then `printRoom` would output the names Dan and Emma under the dashed line. 
+Write a loop that considers each student in turn, and prints out the names of those students whose entry in `studentRooms` match the `room` argument. For the example arrays shown above, if `room == 1`, then `printRoom` would output the names Dan and Emma under the dashed line. 
 So running the program again should produce this:
 
 ```
 % java-introcs ZoomRooms greedy 3
 
-Room: 1
+Room: 0
 -------
 Ava
 Ben
 Carol
 
-Room: 2
+Room: 1
 -------
 Dan
 Emma
@@ -140,20 +143,20 @@ Your function should return an array containing those *N* student names. For exa
 ```
 % java-introcs ZoomRooms greedy 3 < names3.txt
 
-Room: 1
+Room: 0
 -------
 Ava
 Ben
 Carol
 
-Room: 2
+Room: 1
 -------
 ```
 
 Note that with the code we have so far we will always print out exactly two rooms, regardless of the number of students or the room capacity. We will fix that next...
 
 **Step 4**.
-Now you have a simple math problem. The second command line argument specifies the room size (the maximum capacity for each room). For example, in the command shown above it's 3 (right after the word "greedy"). Since the room size is 3, it means that Ava, Ben and Carol can all fit in Room 1. 
+Now you have a simple math problem. The second command line argument specifies the room size (the maximum capacity for each room). For example, in the command shown above it's 3 (right after the word "greedy"). Since the room size is 3, it means that Ava, Ben and Carol can all fit in Room 0. 
 
 The function `roomsNeeded` should compute the number of rooms needed; but as provided it always just returns 2, no matter what. It
 has two arguments: `numStudents` (the total number of students) and `roomSize` (the size of each room, as specified on the command line).
@@ -163,7 +166,7 @@ Change this function to return `numStudents` divided by `roomSize`, **rounding u
 ```
 % java-introcs ZoomRooms greedy 3 < names3.txt
 
-Room: 1
+Room: 0
 -------
 Ava
 Ben
@@ -184,18 +187,18 @@ numRooms | command
 *This might be a good time to upload your partially completed exam.*
 
 **Step 5**.
-Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. After you code it up, test it out with various cases like this one:
+Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 0, the second student in Room 1, third in Room 2, and so forth up to the *N*-th student in Room *N-1*. Next it wraps around: the *(N+1)*-th student goes in Room 0, and the *(N+2)*-th in Room 1, etc. After you code it up, test it out with various cases like this one:
 
 ```
 % java-introcs ZoomRooms robin 3 < names5.txt
 
-Room: 1
+Room: 0
 -------
 Ava
 Carol
 Emma
 
-Room: 2
+Room: 1
 -------
 Ben
 Dan
@@ -213,9 +216,9 @@ Just as in previous steps, if you prefer to see the "debug" version you could us
 ## Bonus Challenge
 
 **Step 6**.
-Congratulations if you made it this far! This last step is difficult one, to provide an extra challenge for those of you who have sufficient time for it. You will only receive credit for this step if your previous steps are all solved correctly; and even then a perfect solution to this step will only be worth 5% of the overall exam grade. So only attempt this step if you are confident in your previous solutions.
+Congratulations if you made it this far! This last step is difficult on a timed exam. It is meant to provide an extra challenge only for those of you who have sufficient time for it. You will only receive credit for this step if your previous steps are all solved correctly; and even then a perfect solution to this step will only be worth 5% of the overall exam grade. So only attempt this step if you are confident in your previous solutions.
 
-Your goal here is to implement a third assignment algorithm in the function `assignRandom` that places students in rooms randomly, with equal probability of ending up in any room. Note that rooms still have capacity `roomSize` so you need to keep track of that somehow. As a hint, here are two possible general strategies for accomplishing this goal:
+Your goal here is to implement a third assignment algorithm in the function `assignRandom` that places students in rooms randomly, with equal probability of ending up in any room. Note that rooms still have capacity `roomSize`, so you need to keep track of that somehow. As a hint, here are two possible general strategies for accomplishing this goal:
 
 * As you assign students to rooms (randomly) you could maintain an array that tracks how many are in each room, and avoid assigning students to rooms that are full.
 * Alternately, you could shuffle the list of students randomly; and then assign them using, say, the "round robin" approach.
