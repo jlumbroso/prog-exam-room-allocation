@@ -1,24 +1,30 @@
-## Spring 2021
-# COS 126 Programming Exam 1
-
----
+# COS 126 Programming Exam 1 (Spr2021)
 
 ## Instructions
-
 **Before the exam.**
-You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so.
-
-**Overview.** 
-You will have 50 minutes to complete a few programming tasks and then upload a Java file that contains your solution. Download the project zip file, which includes all the files you will need, from the 
+You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so. Also, download the project zip file, which includes all the files you will need, including this Exam PDF, from 
 [Exams tab](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html) 
 of the course web page.
-You may download this file before the exam begins.
+
+**Zoom.**
+Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question please send a **private** chat to:
+
+**Emergencies.**
+If you have an emergency, contact the course admin, Kobi Kaplan <kskaplan@princeton.edu>.
+
+**Time.** 
+You have 50 minutes to complete the exam and upload a Java file with your final solution. 
+
+**Recommended plan.**
+This exam follows a step-by-step process. Unlike other exams where you might find it advantageous to read the whole thing before you start, here we recommend you read each step and implement it as you go along. Also you should upload partial solutions a few times during the exam, just as a precaution. 
 
 **Resources.** 
-You may use your book, your notes, your code from programming assignments and precepts, the code on the COS 126 course website, the booksite, and you may read Ed. No form of communication is permitted (e.g., talking, texting, etc.) during the exam, except with course staff.
+You may use: your textbook, the booksite, your notes, your code from programming assignments and precepts, the code on the COS 126 course website, materials from lectures, labs and precepts, and Ed. 
 
-**Do not discuss.**
-Due to various conflicts, and multiple class times, some of your peers will take the exam at a different time. Do not discuss exam contents with anyone *(not even other students that you know already took the exam!)* until after the graded exams are returned. 
+**No communication.** No form of communication is permitted (e.g., talking, texting, etc.) during the exam, except with course staff.
+
+**Do not discuss later.**
+Due to multiple exam times, and various conflicts, some of your peers will take the exam at a different time. Do not discuss the exam contents with anyone *(not even other students that you know already took the exam!)* until after the graded exams are returned. 
 
 **Honor Code pledge.**
 Before submitting your solution, you must "electronically sign" the honor code in the obvious comment at the end of your Java file, by retyping the pledge and then your name. 
@@ -30,7 +36,6 @@ the **Exams** tab of the course [web page](https://www.cs.princeton.edu/courses/
 **Grading.**
 Your program will be graded on mainly on correctness. You will lose a substantial fraction of your overall grade if your program does not compile, or if it crashes on typical inputs. Clarity (including comments), design, and efficiency are secondary concerns with regards to grading on this timed exam. Nevertheless, writing clear code is always important, and will generally help you understand your own code better.
 
----
 <div style="page-break-after: always;"></div>
 
 ## Background
@@ -48,19 +53,19 @@ The only file you need to edit is `ZoomRooms.java`, and it contains some code to
 Notice that if you compile and run the code it already does something:
 
 ```
-javac-introcs ZoomRooms.java
-java-introcs ZoomRooms greedy 3
+% javac-introcs ZoomRooms.java
+% java-introcs ZoomRooms greedy 3
 
 Room: 1
 -------
 ```
 
-There are two command line arguments given here (the string `greedy` and the number 3. The first one tells tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case). 
+There are two command line arguments given here (the string `greedy` and the number 3. The first one tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case). 
 
 Also possibly helpful is a debugging function (`debug`) that tells you the state of some variables in the main function, which can be triggered by appending `-debug` to the name of the algorithm, like this:
 
 ```
-af@afbook2:ZoomRooms% java-introcs ZoomRooms greedy-debug 3
+% java-introcs ZoomRooms greedy-debug 3
 Called debug() function.
 roomSize: 3
 numRooms: 2
@@ -86,7 +91,7 @@ Don't worry too much about the details of that debugging output right now &ndash
 The starting code you ran in the last step only prints out the first room. Modify the `printRooms` function so that it prints out all `numRooms` rooms, by adding a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 1 and 2, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
 
 ```
-java-introcs ZoomRooms greedy 3
+% java-introcs ZoomRooms greedy 3
 
 Room: 1
 -------
@@ -96,7 +101,7 @@ Room: 2
 ```
 
 **Step 2**.
-Next you will modify the `printRoom` function so that it prints out names of students in a room, not just the room number. This function has an argument `room` that says which room it should print out. It receives two other arguments that are *parallel arrays:* `assignedRooms` and `studentNames`. The first array says which room each student is assigned to, while the second contains their names. Here's an example of what those arrays might look like in this program:
+Next you will modify the `printRoom` function so that it prints out names of students in a room, not just the room number. This function has an argument `room` (the room number). It has two other arguments that are *parallel arrays:* `assignedRooms` and `studentNames`. The first array specifies which room each student is assigned to, while the second contains their names. Here's an example of what those arrays might look like in this program:
 
 index  | assignedRooms | studentNames
 ------ | ------------- | ------------
@@ -110,7 +115,7 @@ Write a loop that considers each student in turn, and prints out the names of th
 So running the program again should produce this:
 
 ```
-java-introcs ZoomRooms greedy 3
+% java-introcs ZoomRooms greedy 3
 
 Room: 1
 -------
@@ -124,13 +129,16 @@ Dan
 Emma
 ```
 
-**Step 3**.
-Your starting code has a function `readNames` that returns an array of student names. It is called by the `main` function to get this list of names. But the temporary code you were given always returns the same five names shown above (Ava, Ben, ...). Now you will change this function so that it reads an integer *N* &ge; 0, followed by *N* names, reading from `StdIn`. You can assume that after *N*, the input will always be exactly *N* names, each on one line that could be read using the function `StdIn.readString`. There are several example names files in the directory that conform to this specification.
+### Upload through step 2...
+*This might be a good time to upload your partially completed exam.*
 
-Your function should return an array containing those *N* student names. For example, if you provide the file `names3.txt` on `StdIn` your version of `readNames` would return the three names in that text file (which happen to be first three above), and the output would be:
+**Step 3**.
+Your starting code has a function `readNames` returns an array of student names. The temporary code you were given always returns the same five names shown above (Ava, Ben, ...). Now you will change this function so that it reads from `StdIn` an integer *N* &ge; 0, followed by *N* names. You can assume that after *N*, the input will always be exactly *N* names, each on one line that could be read using the function `StdIn.readString`. There are several example data files in the directory that conform to this specification. For example `names3.txt` contains 3 names (Ava, Ben and Carol).
+
+Your function should return an array containing those *N* student names. For example, if you provide the file `names3.txt` on `StdIn` your version of `readNames` would return the three names in that text file, and the output would be:
 
 ```
-java-introcs ZoomRooms greedy 3 < names3.txt
+% java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 1
 -------
@@ -142,18 +150,18 @@ Room: 2
 -------
 ```
 
-You can try it out with various names files in your directory, but there will always be two rooms printed out, no matter how many students you read in. (That will be fixed in the next step.) So even if it's a very long list line the one in `names26.txt`, you can verify it using the `-debug` output described above.
+Note that with the code we have so far we will always print out exactly two rooms, regardless of the number of students or the room capacity. We will fix that next...
 
 **Step 4**.
-Now you have a simple math problem. Recall that the second command line argument specifies the room size (the maximum capacity for each room). For example, it's 3 in the command shown above, which means that Ava, Ben and Carol can all fit in Room 1. 
+Now you have a simple math problem. The second command line argument specifies the room size (the maximum capacity for each room). For example, in the command shown above it's 3 (right after the word "greedy"). Since the room size is 3, it means that Ava, Ben and Carol can all fit in Room 1. 
 
-The function `roomsNeeded` should compute the number of rooms needed, but as provided it always just returns 2, no matter what. It
-receives two arguments: `numStudents` (the total number of students) and `roomSize` (the size of each room, as specified on the command line).
+The function `roomsNeeded` should compute the number of rooms needed; but as provided it always just returns 2, no matter what. It
+has two arguments: `numStudents` (the total number of students) and `roomSize` (the size of each room, as specified on the command line).
 
-Change this function to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. (Hint: there's a useful function the `Math` library.) Now you should get this, because only one room is needed:
+Change this function to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. (Hint: there's a useful function the `Math` library.) Now you should get the following output, because only one room is needed:
 
 ```
-java-introcs ZoomRooms greedy 3 < names3.txt
+% java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 1
 -------
@@ -162,7 +170,7 @@ Ben
 Carol
 ```
 
-Try it out using some of the sample input files with different numbers of students, to convince yourself it works properly. Here are some example outputs you could verify, and of course you can try others:
+To convince yourself that your function works, try it out with a few different inputs. Here are some example outputs that you could verify, and of course you can think of your own:
 
 numRooms | command
 -------- | -------
@@ -172,11 +180,14 @@ numRooms | command
 4        | `java-introcs ZoomRooms greedy-debug 3 < names11.txt`
 9        | `java-introcs ZoomRooms greedy-debug 3 < names26.txt`
 
+### Upload through Step 4...
+*This might be a good time to upload your partially completed exam.*
+
 **Step 5**.
-Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. After you write it, you can try it out with various cases, like this one:
+Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 1, the second student in Room 2, third in Room 3, and so forth up to the *N*-th student in Room N. Next it wraps around: the *(N+1)*-th student goes in Room 1, and the *(N+2)*-th in Room 2, etc. After you code it up, test it out with various cases like this one:
 
 ```
-java-introcs ZoomRooms robin 3 < names5.txt
+% java-introcs ZoomRooms robin 3 < names5.txt
 
 Room: 1
 -------
@@ -189,6 +200,15 @@ Room: 2
 Ben
 Dan
 ```
+
+Just as in previous steps, if you prefer to see the "debug" version you could use something like:
+
+```
+% java-introcs ZoomRooms robin-debug 3 < names5.txt
+```
+
+### Upload through Step 5...
+*This might be a good time to upload your largely completed exam.*
 
 ## Bonus Challenge
 
@@ -200,15 +220,19 @@ Your goal here is to implement a third assignment algorithm in the function `ass
 * As you assign students to rooms (randomly) you could maintain an array that tracks how many are in each room, and avoid assigning students to rooms that are full.
 * Alternately, you could shuffle the list of students randomly; and then assign them using, say, the "round robin" approach.
 
-Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input, which could be done for example like this:
+Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input. For example, try this a few times and check the outputs:
 
 ```
-java-introcs ZoomRooms random 3 < names5.txt
+% java-introcs ZoomRooms random 3 < names5.txt
 ```
 
 ## Finishing Up
-Don't forget to write and electronically sign the Honor Code pledge in the comment at the end of your Java file, before uploading it.
+Don't forget to write and electronically sign the Honor Code pledge in the comment at the end of your Java file, before uploading the final version.
 
-## After the exam
+## After the Exam
 
-This is optional enrichment, intended for you to think about after the exam is completed: *What are the relative benefits of the three algorithms described?* One factor to consider: in what scenarios could each algorithm leave an empty room; or one student alone in a room? 
+This is optional enrichment, intended for you to think about after the exam is completed.
+
+*What are the relative benefits of the three algorithms described?* One factor to consider: in what scenarios could each algorithm leave an empty room; or one student alone in a room? Is one algorithm more or less efficient for handling large groups of students? What are the other tradeoffs?
+
+*New debugging strategy.* Notice in this exam we used a new debugging strategy that you may not have seen before. We made a function called `debug` that printed out the most important data from the program. You might like to use this idea to help you in future programming assignments.
