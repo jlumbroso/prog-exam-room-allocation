@@ -54,8 +54,8 @@ The only file you need to edit is `ZoomRooms.java`, and it contains some code to
 Notice that if you compile and run the code it already does something:
 
 ```
-% javac-introcs ZoomRooms.java
-% java-introcs ZoomRooms greedy 3
+$ javac-introcs ZoomRooms.java
+$ java-introcs ZoomRooms greedy 3
 
 Room: 0
 -------
@@ -66,7 +66,7 @@ There are two command line arguments given here (the string `greedy` and the num
 Also possibly helpful is a debugging function (called `debug`) that tells you the state of some variables in the main function. It can be triggered by appending `-debug` to the name of the algorithm. So to show this special output, use the algorithm name `greedy-debug`, `robin-debug` or `random-debug`, like this:
 
 ```
-% java-introcs ZoomRooms greedy-debug 3
+$ java-introcs ZoomRooms greedy-debug 3
 Called debug() function.
 roomSize: 3
 numRooms: 2
@@ -94,7 +94,7 @@ Also as a reminder: the code you submit in the end should *still* compile, and a
 The starting code you ran in the last step only prints out the first room. Modify the `printRooms` function so that it prints out all `numRooms` rooms, by adding a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 0 and 1, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
 
 ```
-% java-introcs ZoomRooms greedy 3
+$ java-introcs ZoomRooms greedy 3
 
 Room: 0
 -------
@@ -118,7 +118,7 @@ Write a loop that considers each student in turn, and prints out the names of th
 So running the program again should produce this:
 
 ```
-% java-introcs ZoomRooms greedy 3
+$ java-introcs ZoomRooms greedy 3
 
 Room: 0
 -------
@@ -141,7 +141,7 @@ Your starting code has a function `readNames` returns an array of student names.
 Your function should return an array containing those *N* student names. For example, if you provide the file `names3.txt` on `StdIn` your version of `readNames` would return the three names in that text file, and the output would be:
 
 ```
-% java-introcs ZoomRooms greedy 3 < names3.txt
+$ java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 0
 -------
@@ -164,7 +164,7 @@ has two arguments: `numStudents` (the total number of students) and `roomSize` (
 Change this function to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. (Hint: there's a useful function the `Math` library.) Now you should get the following output, because only one room is needed:
 
 ```
-% java-introcs ZoomRooms greedy 3 < names3.txt
+$ java-introcs ZoomRooms greedy 3 < names3.txt
 
 Room: 0
 -------
@@ -189,7 +189,7 @@ numRooms | command
 Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 0, the second student in Room 1, third in Room 2, and so forth up to the *N*-th student in Room *N-1*. Next it wraps around: the *(N+1)*-th student goes in Room 0, and the *(N+2)*-th in Room 1, etc. After you code it up, test it out with various cases like this one:
 
 ```
-% java-introcs ZoomRooms robin 3 < names5.txt
+$ java-introcs ZoomRooms robin 3 < names5.txt
 
 Room: 0
 -------
@@ -206,7 +206,7 @@ Dan
 Just as in previous steps, if you prefer to see the "debug" version you could use something like:
 
 ```
-% java-introcs ZoomRooms robin-debug 3 < names5.txt
+$ java-introcs ZoomRooms robin-debug 3 < names5.txt
 ```
 
 ### Upload through Step 5...
@@ -225,7 +225,7 @@ Your goal here is to implement a third assignment algorithm in the function `ass
 Either way would work, and you might also think of other strategies. Regardless, the details are up to you. Obviously if you implement this algorithm it should generally give different answers each time you run it on the same input. For example, try this a few times and check the outputs:
 
 ```
-% java-introcs ZoomRooms random 3 < names5.txt
+$ java-introcs ZoomRooms random 3 < names5.txt
 ```
 
 ## Finishing Up
