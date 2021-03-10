@@ -37,7 +37,7 @@ jobs:
         run: "cp -vpr ./pkg/template/* ./output/ZoomRooms/; mv -v ./output/ZoomRooms/{LIFT,ZoomRooms}.iml"
       
       - name: ZIP folder
-        run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
+        run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht ZoomRooms; tree -a ZoomRooms; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
       
       - name: Commit compiled PDF
         uses: EndBug/add-and-commit@v4
