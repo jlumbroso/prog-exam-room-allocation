@@ -18,6 +18,10 @@ You have 50 minutes to complete the exam and upload a Java file with your final 
 **Recommended plan.**
 This exam follows a step-by-step process. Unlike other exams where you might find it advantageous to read the whole thing before you start, here we recommend you read each step and implement it as you go along. Also you should upload partial solutions a few times during the exam, just as a precaution. 
 
+
+**What code to edit.**
+The initial code contains several functions to get you started. We *strongly recommend* that you only add or modify code between the pairs of comments saying "STUDENT CODE BEGIN" and "STUDENT CODE END". This is the easiest way to solve the tasks in this exam. Though it is neither recommended nor needed: you may edit other code and/or add your own functions, provided you **do not** modify the existing function signatures. 
+
 **Resources.** 
 You may use: your textbook, the booksite, your notes, your code from programming assignments and precepts, the code on the COS 126 course website, materials from lectures, labs and precepts, and Ed. 
 
@@ -31,7 +35,7 @@ Before submitting your solution, you must "electronically sign" the honor code i
 
 **Submissions.**
 Submit your work using the `Submit` link on
-the **Exams** tab of the course [web page](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html). 
+the **Exams** tab of the course [web page](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html). You are responsible for submitting your solution before the time is called at the end of the exam.
 
 **Grading.**
 Your program will be graded mainly on correctness. You will lose a substantial fraction of your overall grade if your program does not compile, or if it crashes on typical inputs. Clarity (including comments), design, and efficiency are secondary concerns with regards to grading on this timed exam. Nevertheless, writing clear code is always important, and will generally help you understand your own code better.
@@ -181,6 +185,8 @@ numRooms | command
 1        | `java-introcs ZoomRooms greedy-debug 3 < names3.txt`
 4        | `java-introcs ZoomRooms greedy-debug 3 < names11.txt`
 9        | `java-introcs ZoomRooms greedy-debug 3 < names26.txt`
+
+<div style="page-break-after: always;"></div>
 
 ### Upload through Step 4...
 *This might be a good time to upload your partially completed exam.*
