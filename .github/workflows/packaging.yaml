@@ -3,7 +3,7 @@ name: Process data
 on: [push, pull_request]
 
 jobs:
-  process-data:
+  compile-pdf:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -19,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install markdown-to-pdf
-        run: npm install -g md-to-pdf
+        run: sudo npm install -g md-to-pdf
       
       - name: Compile PDF exam
         run: "md-to-pdf --body-class 'markdown-body' --css '.page-break { page-break-after: always; } .markdown-body { font-size: 11px; } .markdown-body pre > code { white-space: pre-wrap; }' --stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' ./src/PE1.md"
