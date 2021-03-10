@@ -4,7 +4,7 @@
 **Before the exam.**
 You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so. Also, download the project zip file, which includes all the files you will need, including this Exam PDF, from 
 [Exams](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html) 
-tab of the course web page.
+tab on the course web page.
 
 **Zoom.**
 Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **public** chat indicating "*I have a question*" and a member of the course staff will follow up with you.
@@ -43,7 +43,7 @@ Your program will be graded mainly on correctness. You will lose a substantial f
 You are an engineer at a startup company called Zoom, writing software for online video meetings. A feature commonly used in classroom settings is called *breakout rooms*. It allows teachers to divide a large class into smaller groups, each of which meets independently in different "rooms." 
 
 **Greedy Algorithm.**
-Another engineer has already developed an algorithm to assign students to rooms in a "greedy" fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 0, and the next *N* students in Room 1, and so forth, until there are no students left. (Note that as engineers we are numbering the rooms starting with 0 &ndash; the convention we use throughout this exam &ndash; but naturally the Zoom interface will translate those numbers to start with 1.)
+Another engineer has already developed an algorithm to assign students to rooms in a "greedy" fashion, as follows. Suppose the room capacity is *N*. The greedy algorithm places the first *N* students in Room 0, and the next *N* students in Room 1, and so forth, until there are no students left. (Note that as engineers we are numbering the rooms starting with 0 &ndash; the convention we use throughout this exam.)
 Unfortunately there are some drawbacks to this algorithm, and your manager has asked you to provide some alternatives. But first you need to write some helper functions to support this algorithm.
 
 ## Getting Started
@@ -61,7 +61,7 @@ Room: 0
 -------
 ```
 
-There are two command line arguments given here (the string `greedy` and the number 3. The first one tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case). 
+There are two command line arguments given: the string `greedy` and the number 3. The first one tells the program which assignment algorithm to use (`greedy` in this case, and the other two options are `robin` and `random`). The second argument is the maximum number of students the teacher wants in each room (3 in this case). You may assume this number is always greater than 1. 
 
 Also possibly helpful is a debugging function (called `debug`) that tells you the state of some variables in the main function. It can be triggered by appending `-debug` to the name of the algorithm. So to show this special output, use the algorithm name `greedy-debug`, `robin-debug` or `random-debug`, like this:
 
@@ -91,7 +91,7 @@ Also as a reminder: the code you submit in the end should *still* compile, and a
 ## The Exam
 
 **Step 1**.
-The starting code you ran in the last step only prints out the first room. Modify the `printRooms` function so that it prints out all `numRooms` rooms, by adding a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 0 and 1, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
+The starting code you ran in Step 0 only prints the first room. Modify the `printRooms` function so that it prints all `numRooms` rooms, by using a loop. If your changes are successful, when you compile and run it, `ZoomRooms` should now print out the headers for Rooms 0 and 1, as shown below. Note that there are still no student names printed yet, which will be addressed in the next step.
 
 ```
 $ java-introcs ZoomRooms greedy 3
@@ -104,7 +104,7 @@ Room: 1
 ```
 
 **Step 2**.
-Next you will modify the `printRoom` function so that it prints out names of students in a room, not just the room number. This function has an argument `room` (the room number). It has two other arguments that are *parallel arrays:* `assignedRooms` and `studentNames`. The first array specifies which room each student is assigned to, while the second contains their names. Here's an example of what those arrays might look like in this program:
+Next you will modify the `printRoom` function so that it prints names of students in a room, not just the room number. This function has an argument `room` (the room number). It has two other arguments that are *parallel arrays:* `assignedRooms` and `studentNames`. The first array specifies which room each student is assigned to, while the second contains their names. Here's an example of what those arrays might look like in this program:
 
 index  | assignedRooms | studentNames
 ------ | ------------- | ------------
@@ -159,7 +159,7 @@ Note that with the code we have so far we will always print out exactly two room
 Now you have a simple math problem. The second command line argument specifies the room size (the maximum capacity for each room). For example, in the command shown above it's 3 (right after the word "greedy"). Since the room size is 3, it means that Ava, Ben and Carol can all fit in Room 0. 
 
 The function `roomsNeeded` should compute the number of rooms needed; but as provided it always just returns 2, no matter what. It
-has two arguments: `numStudents` (the total number of students) and `roomSize` (the size of each room, as specified on the command line).
+takes two arguments: `numStudents` (the total number of students) and `roomSize` (the size of each room, as specified on the command line).
 
 Change this function to return `numStudents` divided by `roomSize`, **rounding up** to an integer in cases where it does not divide evenly. (Hint: there's a useful function the `Math` library.) Now you should get the following output, because only one room is needed:
 
@@ -186,7 +186,7 @@ numRooms | command
 *This might be a good time to upload your partially completed exam.*
 
 **Step 5**.
-Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 0, the second student in Room 1, third in Room 2, and so forth up to the *N*-th student in Room *N-1*. Next it wraps around: the *(N+1)*-th student goes in Room 0, and the *(N+2)*-th in Room 1, etc. After you code it up, test it out with various cases like this one:
+Now in the function `assignRobin` you will write an algorithm to assign the students in "round robin" order: the first student in Room 0, the second student in Room 1, third in Room 2, and so forth up to the *N*-th student in Room *N-1*. Next it wraps around: the *(N+1)*-th student goes in Room 0, and the *(N+2)*-th in Room 1, etc. After you implement this function, test it with various cases like this one:
 
 ```
 $ java-introcs ZoomRooms robin 3 < names5.txt
