@@ -1,4 +1,4 @@
-# COS 126 Programming Exam 1 (Spr2021)
+# COS 126 Programming Exam 1 (Spring 2021)
 
 ## Instructions
 **Before the exam.**
