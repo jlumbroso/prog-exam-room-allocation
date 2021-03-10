@@ -186,6 +186,8 @@ numRooms | command
 4        | `java-introcs ZoomRooms greedy-debug 3 < names11.txt`
 9        | `java-introcs ZoomRooms greedy-debug 3 < names26.txt`
 
+<div style="page-break-after: always;"></div>
+
 ### Upload through Step 4...
 *This might be a good time to upload your partially completed exam.*
 
