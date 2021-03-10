@@ -19,10 +19,10 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install markdown-to-pdf
-        run: sudo npm install -g md-to-pdf
+        run: npm install --prefix . md-to-pdf
       
       - name: Compile PDF exam
-        run: "md-to-pdf --body-class 'markdown-body' --css '.page-break { page-break-after: always; } .markdown-body { font-size: 11px; } .markdown-body pre > code { white-space: pre-wrap; }' --stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' ./src/PE1.md"
+        run: "node node_modules/md-to-pdf/dist/cli.js --body-class 'markdown-body' --css '.page-break { page-break-after: always; } .markdown-body { font-size: 11px; } .markdown-body pre > code { white-space: pre-wrap; }' --stylesheet 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css' ./src/PE1.md"
 
       - name: Commit compiled PDF
         uses: EndBug/add-and-commit@v4
