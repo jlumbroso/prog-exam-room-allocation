@@ -1,0 +1,35 @@
+name: Process data
+
+on: [push, pull_request]
+
+jobs:
+  process-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install markdown-to-pdf
+        run: npm install -g md-to-pdf
+      
+      - name: Compile PDF exam
+        run: md-to-pdf --body-class "markdown-body" --css ".page-break { page-break-after: always; } .markdown-body { font-size: 11px; } .markdown-body pre > code { white-space: pre-wrap; }" --stylesheet "https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css" ./src/PE1.md
+
+      - name: Commit compiled PDF
+        uses: EndBug/add-and-commit@v4
+        with:
+          message: "Commit compiled PDF"
+          add: "*.pdf"
+          cwd: "."
+          force: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
