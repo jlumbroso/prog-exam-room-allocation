@@ -1,9 +1,9 @@
-name: Process data
+name: Compile the student ZIP file
 
 on: [push, pull_request]
 
 jobs:
-  compile-pdf:
+  compile-zip:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,7 +35,7 @@ jobs:
       
       - run: "rsync --archive --quiet --exclude 'runConfigurations' --exclude '*.save' --exclude '.name' './pkg/template/.idea/' './output/ZoomRooms/.idea/'"
       - run: "rsync --archive --quiet './pkg/template/.lift/' './output/ZoomRooms/.lift/'"
-      - run: "cp -vpr ./pkg/template/LIFT.iml ./output/ZoomRooms/ZoomRooms.iml"
+      - run: "cp -vpr ./pkg/template/*.iml ./output/ZoomRooms/"
       
       - name: ZIP folder
         run: "rm -vRf ./PE1.zip; pushd ./output; ls -alht ZoomRooms; tree -a ZoomRooms; zip -vr PE1.zip ./ZoomRooms; popd; mv -v output/PE1.zip ./"
