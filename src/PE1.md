@@ -3,14 +3,14 @@
 ## Instructions
 **Before the exam.**
 You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so. Also, download the project zip file, which includes all the files you will need, including this Exam PDF, from 
-[Exams tab](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html) 
-of the course web page.
+[Exams](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html) 
+tab of the course web page.
 
 **Zoom.**
-Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question please send a **private** chat to:
+Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **private** chat to any Host or Co-Host on Zoom, *other than* Kobi Kaplan.
 
 **Emergencies.**
-If you have an emergency, contact the course admin, Kobi Kaplan <kskaplan@princeton.edu>.
+If you have an emergency, contact the course admin, Kobi Kaplan, either via Zoom chat or at <kskaplan@princeton.edu>.
 
 **Time.** 
 You have 50 minutes to complete the exam and upload a Java file with your final solution. 
@@ -179,7 +179,6 @@ numRooms | command
 -------- | -------
 0        | `java-introcs ZoomRooms greedy-debug 3 < names0.txt`
 1        | `java-introcs ZoomRooms greedy-debug 3 < names3.txt`
-2        | `java-introcs ZoomRooms greedy-debug 3 < names5.txt`
 4        | `java-introcs ZoomRooms greedy-debug 3 < names11.txt`
 9        | `java-introcs ZoomRooms greedy-debug 3 < names26.txt`
 
