@@ -7,7 +7,7 @@ You may read this page of instructions before the exam begins. But do not start 
 tab of the course web page.
 
 **Zoom.**
-Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **private** chat to any Host or Co-Host on Zoom, *other than* Kobi Kaplan.
+Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **public** chat indicating "*I have a question*" and a member of the course staff will follow up with you.
 
 **Emergencies.**
 If you have an emergency, contact the course admin, Kobi Kaplan, either via Zoom chat or at <kskaplan@princeton.edu>.
