@@ -85,7 +85,6 @@ public class ZoomRooms {
         for (int i = 0; i < names.length; i++) {
             int room = i % numRooms;
             assignedRooms[i] = room;
-            StdOut.println(i + " " + room);
         }
         return assignedRooms;
         // ---------------- STUDENT CODE ALT ----------------
