@@ -1,13 +1,22 @@
 # COS 126 Programming Exam 1 (Spring 2021)
 
 ## Instructions
-**Before the exam.**
-You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so. Also, download the project zip file, which includes all the files you will need, including this Exam PDF, from 
+
+**Download zip now.**
+Download the project zip file, which includes all the files you will need, including this Exam PDF, from 
 [Exams](https://www.cs.princeton.edu/courses/archive/spring21/cos126/exams.html) 
-tab on the course web page.
+tab on the course web page. You should download and open the zip the same way you did for your assignments.
+[Here](https://docs.google.com/document/d/1RDbkqYjLZzQsURj46GFceHQmrqnDnaIyupMBQTSeto0/)
+is a doc with tips on that for both Mac and Windows. These instructions are the PDF in that zip file, and you can also open Intellij on the folder inside the zip (`ZoomRooms`). 
+
+**Before the exam.**
+You may read this page of instructions before the exam begins. But do not start *(even by reading the next page)* until you are instructed to do so. Also do not open the Java file in IntelliJ until the exam begins.
 
 **Zoom.**
-Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **private** chat to any Host or Co-Host on Zoom, *other than* Kobi Kaplan.
+Please remain in zoom during the exam. Leave **video off** and **mute** your mic. If you have a question about the exam content, send a **private** chat to:
+
+* Adam Finkelstein, if your last name begins A-L
+* Alan Kaplan, if your last name begins M-Z
 
 **Emergencies.**
 If you have an emergency, contact the course admin, Kobi Kaplan, either via Zoom chat or at <kskaplan@princeton.edu>.
@@ -118,7 +127,7 @@ index  | assignedRooms | studentNames
 3      | 1             | Dan
 4      | 1             | Emma
 
-Write a loop that considers each student in turn, and prints out the names of those students whose entry in `studentRooms` match the `room` argument. For the example arrays shown above, if `room == 1`, then `printRoom` would output the names Dan and Emma under the dashed line. 
+Write a loop that considers each student in turn, and prints out the names of those students whose entry in `assignedRooms` match the `room` argument. For the example arrays shown above, if `room == 1`, then `printRoom` would output the names Dan and Emma under the dashed line. 
 So running the program again should produce this:
 
 ```
